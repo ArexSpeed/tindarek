@@ -1,17 +1,24 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Onboarding from "./pages/Onboarding";
 import AccountDetails from "./pages/AccountDetails";
+import Profile from "./pages/Profile";
+import Discover from "./pages/Discover";
+import Matches from "./pages/Matches";
+import Chat from "./pages/Chat";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/discover" element={<Discover />} />
+      <Route path="/matches" element={<Matches />} />
+      <Route path="/chat" element={<Chat />} />
       <Route path="/account" element={<Account />} />
       <Route path="/account/:id" element={<AccountDetails />} />
       <Route path="/onboarding" element={<Onboarding />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

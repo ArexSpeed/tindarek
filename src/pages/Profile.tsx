@@ -14,7 +14,7 @@ const Profile = () => {
   };
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-start w-full h-full">
+      <div className="flex flex-col items-center justify-start w-full h-full py-24">
         <h2 className="font-semibold">Profile Details</h2>
         <section className="flex items-center justify-center w-full h-full">
           <form
@@ -49,23 +49,50 @@ const Profile = () => {
               placeholder="Nickname"
               required
             />
-            <input
-              type="text"
-              className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-              placeholder="First name"
-              required
-            />
-            <input
-              type="text"
-              className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-              placeholder="Last name"
-              required
-            />
+            <div className="grid w-full grid-cols-2 gap-2">
+              <input
+                type="text"
+                className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                placeholder="First name"
+                required
+              />
+              <input
+                type="text"
+                className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                placeholder="Last name"
+                required
+              />
+            </div>
+            <div className="grid w-full grid-cols-2 gap-2">
+              <input
+                type="text"
+                className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                placeholder="Profession"
+                required
+              />
+              <input
+                type="text"
+                className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                placeholder="Location"
+                required
+              />
+            </div>
             <input
               type="text"
               className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
               placeholder="Date of birth"
             />
+            <div className="w-full">
+              <label className="block mb-2 text-sm font-medium text-gray-900">
+                Intro text
+              </label>
+              <textarea
+                id="message"
+                rows={2}
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-red-200 focus:border-red-200 "
+                placeholder="Description"
+              ></textarea>
+            </div>
             <div className="w-full">
               <label className="block mb-2 text-sm font-medium text-gray-900">
                 Tell something about yourself

@@ -1,20 +1,20 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/effect-cards";
-
-// import required modules
 import { EffectCards } from "swiper/modules";
 import { Card } from "./Card";
-import { useCallback } from "react";
-//import { useState } from "react";
 import users from "../data/users.json";
+import { useAppDispatch } from "../context/store";
+import { setCurrentUser } from "../context/slices/cardSlice";
+
+import "swiper/css";
+import "swiper/css/effect-cards";
 
 export const Cards = () => {
   //const [current, setCurrent] = useState("1");
   //const swiperSlide = useSwiperSlide();
-  const changeSlide = useCallback(() => console.log("callback"), []);
+  const dispatch = useAppDispatch();
+  const changeSlide = (index: number) => {
+    dispatch(setCurrentUser(users[index].id));
+  };
 
   return (
     <div className="">
@@ -23,7 +23,7 @@ export const Cards = () => {
         grabCursor={true}
         modules={[EffectCards]}
         className="w-[300px] h-[400px]"
-        onSlideChange={(e) => console.log(e.activeIndex)}
+        onSlideChange={(e) => changeSlide(e.activeIndex)}
       >
         {users.map((user) => (
           <SwiperSlide

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
+import { CameraIcon } from "../components/Icons";
 
 const Profile = () => {
   const image1Ref = useRef<HTMLInputElement>(null);
@@ -13,12 +14,12 @@ const Profile = () => {
   };
   return (
     <Layout>
-      <div className="w-full h-full flex flex-col justify-start items-center">
+      <div className="flex flex-col items-center justify-start w-full h-full">
         <h2 className="font-semibold">Profile Details</h2>
-        <section className="h-full w-full flex justify-center items-center">
+        <section className="flex items-center justify-center w-full h-full">
           <form
             onSubmit={() => {}}
-            className="flex flex-col w-full p-4 gap-4 items-center"
+            className="flex flex-col items-center w-full gap-4 p-4"
           >
             <div className="flex w-[192px] h-[256px] rounded-lg relative bg-gray-300 overflow-hidden">
               <div className="absolute bottom-0 right-0">
@@ -35,11 +36,11 @@ const Profile = () => {
                   type="button"
                   onClick={() => image1Ref.current?.click()}
                 >
-                  +
+                  <CameraIcon className="w-6 h-6 text-white" />
                 </button>
               </div>
               {imagePreview && (
-                <img src={imagePreview} className="w-full h-full object-fill" />
+                <img src={imagePreview} className="object-fill w-full h-full" />
               )}
             </div>
             <input

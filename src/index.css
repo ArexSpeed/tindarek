@@ -41,6 +41,9 @@ body {
   }
 .file-upload__button {
     -webkit-appearance: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: pink;
     width: 36px;
     height: 36px;

@@ -1,0 +1,67 @@
+[
+    {
+        "id": "135232235",
+        "nickname": "Arco",
+        "firstName": "Arek",
+        "lastName": "Cichy",
+        "profession": "Programmer",
+        "location": "London",
+        "dateOfBirth": "14.05.1995",
+        "sex": "male",
+        "shortDescription": "Zakoduje Ci serce",
+        "description": "lalala",
+        "imageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+        "id": "2125135156",
+        "nickname": "Arni",
+        "firstName": "Arnold",
+        "lastName": "Schawrzeneger",
+        "profession": "Fitness coach",
+        "location": "LA, USA",
+        "dateOfBirth": "20.10.1972",
+        "sex": "male",
+        "shortDescription": "Podźwigamy?",
+        "description": "lalala",
+        "imageSrc": "https://media.istockphoto.com/id/1014791354/photo/charming-man.webp?b=1&s=170667a&w=0&k=20&c=Av2D8VYfMM53SN6xNE_NJO9drAvdUDbInTS_j67vbx0="
+    },
+    {
+        "id": "325346356363",
+        "nickname": "Frank",
+        "firstName": "Frank",
+        "lastName": "Fischer",
+        "profession": "Football player",
+        "location": "Berlin",
+        "dateOfBirth": "10.01.1996",
+        "sex": "male",
+        "shortDescription": "Postrzelamy?",
+        "description": "lalala",
+        "imageSrc": "https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?cs=srgb&dl=pexels-juan-gomez-2589653.jpg&fm=jpg"
+    },
+    {
+        "id": "42352346356",
+        "nickname": "Katty",
+        "firstName": "Kasia",
+        "lastName": "Masia",
+        "profession": "Actress",
+        "location": "London",
+        "dateOfBirth": "11.08.1995",
+        "sex": "female",
+        "shortDescription": "Występuje na Broadway",
+        "description": "lalala",
+        "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU"
+    },
+    {
+        "id": "5235245367",
+        "nickname": "Bienia",
+        "firstName": "Weronika",
+        "lastName": "Farfala",
+        "profession": "Shipper",
+        "location": "Warsaw",
+        "dateOfBirth": "09.06.2001",
+        "sex": "female",
+        "shortDescription": "Załadować Ci coś?",
+        "description": "lalala",
+        "imageSrc": "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    }
+]

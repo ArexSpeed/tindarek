@@ -1,0 +1,245 @@
+[
+    {
+        "chatId": "12345",
+        "users": [
+            {
+                "userId": "135232235",
+                "firstName": "Arek",
+                "lastName": "Cichy",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            },
+            {
+                "userId": "2125135156",
+                "firstName": "Arnold",
+                "lastName": "Schawrzeneger",
+                "userImageSrc": "https://media.istockphoto.com/id/1014791354/photo/charming-man.webp?b=1&s=170667a&w=0&k=20&c=Av2D8VYfMM53SN6xNE_NJO9drAvdUDbInTS_j67vbx0="
+            }
+        ],
+        "messages": [
+            {
+                "message": "Hey there!",
+                "userId": "135232235",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "timestamp": "1639353400"
+            },
+            {
+                "message": "Hi! How are you?",
+                "userId": "2125135156",
+                "userImageSrc": "http://2125135156-image",
+                "timestamp": "1639353500"
+            },
+            {
+                "message": "I'm good, thanks. How about you?",
+                "userId": "135232235",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "timestamp": "1639353600"
+            },
+            {
+                "message": "Doing well too. Anything exciting happening?",
+                "userId": "2125135156",
+                "userImageSrc": "http://2125135156-image",
+                "timestamp": "1639353700"
+            },
+            {
+                "message": "Not much, just chilling.",
+                "userId": "135232235",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "timestamp": "1639353800"
+            },
+            {
+                "message": "Cool. I watched a movie yesterday.",
+                "userId": "2125135156",
+                "userImageSrc": "http://2125135156-image",
+                "timestamp": "1639353900"
+            },
+            {
+                "message": "Which one?",
+                "userId": "135232235",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "timestamp": "1639354000"
+            },
+            {
+                "message": "It was a comedy called 'Laugh Out Loud.'",
+                "userId": "2125135156",
+                "userImageSrc": "http://2125135156-image",
+                "timestamp": "1639354100"
+            },
+            {
+                "message": "Sounds fun! I'll check it out.",
+                "userId": "135232235",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "timestamp": "1639354200"
+            },
+            {
+                "message": "Sure, let me know how you find it.",
+                "userId": "2125135156",
+                "userImageSrc": "http://2125135156-image",
+                "timestamp": "1639354300"
+            },
+            {
+                "message": "Will do!",
+                "userId": "135232235",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "timestamp": "1639354400"
+            }
+        ]
+    },
+    {
+        "chatId": "67890",
+        "users": [
+            {
+                "userId": "325346356363",
+                "firstName": "Frank",
+                "lastName": "Fischer",
+                "userImageSrc": "https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?cs=srgb&dl=pexels-juan-gomez-2589653.jpg&fm=jpg"
+            },
+            {
+                "userId": "42352346356",
+                "firstName": "Kasia",
+                "lastName": "Masia",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU"
+            }
+        ],
+        "messages": [
+            {
+                "message": "Hello!",
+                "userId": "325346356363",
+                "userImageSrc": "https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?cs=srgb&dl=pexels-juan-gomez-2589653.jpg&fm=jpg",
+                "timestamp": "1639355000"
+            },
+            {
+                "message": "Hi there! How's your day going?",
+                "userId": "42352346356",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU",
+                "timestamp": "1639355100"
+            },
+            {
+                "message": "It's been good. Just finished some work.",
+                "userId": "325346356363",
+                "userImageSrc": "https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?cs=srgb&dl=pexels-juan-gomez-2589653.jpg&fm=jpg",
+                "timestamp": "1639355200"
+            },
+            {
+                "message": "Nice! I'm planning to go for a run later.",
+                "userId": "42352346356",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU",
+                "timestamp": "1639355300"
+            },
+            {
+                "message": "That sounds healthy! I should exercise more.",
+                "userId": "325346356363",
+                "userImageSrc": "https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?cs=srgb&dl=pexels-juan-gomez-2589653.jpg&fm=jpg",
+                "timestamp": "1639355400"
+            },
+            {
+                "message": "It's never too late to start!",
+                "userId": "42352346356",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU",
+                "timestamp": "1639355500"
+            },
+            {
+                "message": "You're right. Maybe I'll join you for a run next time.",
+                "userId": "325346356363",
+                "userImageSrc": "https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?cs=srgb&dl=pexels-juan-gomez-2589653.jpg&fm=jpg",
+                "timestamp": "1639355600"
+            },
+            {
+                "message": "That would be great! We can motivate each other.",
+                "userId": "42352346356",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU",
+                "timestamp": "1639355700"
+            },
+            {
+                "message": "Absolutely! Let me know when you're free.",
+                "userId": "325346356363",
+                "userImageSrc": "https://images.pexels.com/photos/2589653/pexels-photo-2589653.jpeg?cs=srgb&dl=pexels-juan-gomez-2589653.jpg&fm=jpg",
+                "timestamp": "1639355800"
+            },
+            {
+                "message": "Will do! Take care for now.",
+                "userId": "42352346356",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU",
+                "timestamp": "1639355900"
+            }
+        ]
+    },
+    {
+        "chatId": "98765",
+        "users": [
+            {
+                "userId": "135232235",
+                "firstName": "Arek",
+                "lastName": "Cichy",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            },
+            {
+                "userId": "42352346356",
+                "firstName": "Kasia",
+                "lastName": "Masia",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU"
+            }
+        ],
+        "messages": [
+            {
+                "message": "Hey!",
+                "userId": "135232235",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "timestamp": "1639357000"
+            },
+            {
+                "message": "Hello! How's it going?",
+                "userId": "42352346356",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU",
+                "timestamp": "1639357100"
+            },
+            {
+                "message": "Not bad. Just finished a good book.",
+                "userId": "135232235",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "timestamp": "1639357200"
+            },
+            {
+                "message": "Nice! What book was it?",
+                "userId": "42352346356",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU",
+                "timestamp": "1639357300"
+            },
+            {
+                "message": "It was 'The Silent World' by Jacques Cousteau.",
+                "userId": "135232235",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "timestamp": "1639357400"
+            },
+            {
+                "message": "Sounds interesting. I might check it out.",
+                "userId": "42352346356",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU",
+                "timestamp": "1639357500"
+            },
+            {
+                "message": "You should! It's a fascinating exploration story.",
+                "userId": "135232235",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "timestamp": "1639357600"
+            },
+            {
+                "message": "Thanks for the recommendation!",
+                "userId": "42352346356",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU",
+                "timestamp": "1639357700"
+            },
+            {
+                "message": "Anytime! Let me know what you think.",
+                "userId": "135232235",
+                "userImageSrc": "https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                "timestamp": "1639357800"
+            },
+            {
+                "message": "Sure thing! Have a great day!",
+                "userId": "42352346356",
+                "userImageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjZ828xTGcWsmKJrraIzVcWHhb9bVkUHUjLIlB3FS32-mn5MMApn2-8IlCgaKaQ_AS6rI&usqp=CAU",
+                "timestamp": "1639357900"
+            }
+        ]
+    }
+]

@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Discover from "./pages/Discover";
 import Matches from "./pages/Matches";
 import Chat from "./pages/Chat";
+import ChatDetails from "./pages/ChatDetails";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/discover" element={<Discover />} />
       <Route path="/matches" element={<Matches />} />
       <Route path="/chat" element={<Chat />} />
+      <Route path="/chat/:id" element={<ChatDetails />} />
       <Route path="/account" element={<Account />} />
       <Route path="/account/:id" element={<AccountDetails />} />
       <Route path="/onboarding" element={<Onboarding />} />

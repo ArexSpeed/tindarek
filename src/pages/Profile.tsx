@@ -1,6 +1,7 @@
 import { ChangeEvent, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
 import { CameraIcon } from "../components/Icons";
+import { TopBar } from "../components/TopBar";
 
 const Profile = () => {
   const image1Ref = useRef<HTMLInputElement>(null);
@@ -14,8 +15,8 @@ const Profile = () => {
   };
   return (
     <Layout>
+      <TopBar title="Profile" />
       <div className="flex flex-col items-center justify-start w-full h-full gap-4 p-2 overflow-auto">
-        <h2 className="font-semibold">Profile Details</h2>
         <section className="flex items-center justify-center w-full">
           <form
             onSubmit={() => {}}

@@ -9,8 +9,6 @@ import "swiper/css";
 import "swiper/css/effect-cards";
 
 export const Cards = () => {
-  //const [current, setCurrent] = useState("1");
-  //const swiperSlide = useSwiperSlide();
   const dispatch = useAppDispatch();
   const changeSlide = (index: number) => {
     dispatch(setCurrentUser(users[index].id));
@@ -33,22 +31,6 @@ export const Cards = () => {
             <Card user={user} />
           </SwiperSlide>
         ))}
-
-        {/* <SwiperSlide className="flex items-center justify-center bg-red-300 rounded-2xl">
-          Swiper 1
-        </SwiperSlide>
-        <SwiperSlide className="flex items-center justify-center bg-red-300 rounded-2xl">
-          Swiper 1
-        </SwiperSlide>
-        <SwiperSlide className="flex items-center justify-center bg-red-300 rounded-2xl">
-          Swiper 1
-        </SwiperSlide>
-        <SwiperSlide className="flex items-center justify-center bg-red-300 rounded-2xl">
-          Swiper 1
-        </SwiperSlide>
-        <SwiperSlide className="flex items-center justify-center bg-red-300 rounded-2xl">
-          Swiper 1
-        </SwiperSlide> */}
       </Swiper>
     </div>
   );

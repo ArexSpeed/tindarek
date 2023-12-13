@@ -2,10 +2,12 @@ import React from "react";
 import { Layout } from "../components/Layout";
 import { Cards } from "../components/Cards";
 import { CardActions } from "../components/CardActions";
+import { TopBar } from "../components/TopBar";
 
 const Discover = () => {
   return (
     <Layout>
+      <TopBar />
       <div className="flex flex-col justify-center w-full h-full overflow-hidden">
         <Cards />
         <CardActions />

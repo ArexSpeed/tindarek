@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Layout } from "../components/Layout";
 import users from "../data/users.json";
 import { HeartIcon } from "../components/Icons";
+import { TopBar } from "../components/TopBar";
 
 const AccountDetails = () => {
   const { id } = useParams();
@@ -12,6 +13,7 @@ const AccountDetails = () => {
   const age = new Date().getFullYear() - +user.dateOfBirth.slice(6, 12);
   return (
     <Layout>
+      <TopBar title={user.nickname} />
       <div className="flex flex-col items-start justify-start w-full h-full mb-16">
         <div className="relative">
           <img src={user?.imageSrc} className="w-full" />

@@ -1,4 +1,3 @@
-import React from "react";
 import { Layout } from "../components/Layout";
 import { useAppSelector } from "../context/store";
 import { selectedMatchUsers } from "../context/slices/matchSlice";
@@ -10,7 +9,7 @@ const Matches = () => {
 
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-start w-full h-full gap-4 p-2">
+      <div className="flex flex-col items-center justify-start w-full h-full gap-4 p-2 pb-4 overflow-auto">
         <MatchTop />
         <div className="grid items-start justify-start w-full h-auto grid-cols-2 gap-2">
           {matches.map((user) => (
@@ -18,6 +17,7 @@ const Matches = () => {
           ))}
         </div>
       </div>
+      <div className="w-full h-16 bg-transparent" />
     </Layout>
   );
 };

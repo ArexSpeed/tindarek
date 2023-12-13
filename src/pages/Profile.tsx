@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
 import { CameraIcon } from "../components/Icons";
 
@@ -14,12 +14,12 @@ const Profile = () => {
   };
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-start w-full h-full py-24">
+      <div className="flex flex-col items-center justify-start w-full h-full gap-4 p-2 overflow-auto">
         <h2 className="font-semibold">Profile Details</h2>
-        <section className="flex items-center justify-center w-full h-full">
+        <section className="flex items-center justify-center w-full">
           <form
             onSubmit={() => {}}
-            className="flex flex-col items-center w-full gap-4 p-4"
+            className="flex flex-col items-center justify-center w-full gap-4 p-4"
           >
             <div className="flex w-[192px] h-[256px] rounded-lg relative bg-gray-300 overflow-hidden">
               <div className="absolute bottom-0 right-0">
@@ -43,54 +43,92 @@ const Profile = () => {
                 <img src={imagePreview} className="object-fill w-full h-full" />
               )}
             </div>
-            <input
-              type="text"
-              className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-              placeholder="Nickname"
-              required
-            />
+            <p>Nickname</p>
+
             <div className="grid w-full grid-cols-2 gap-2">
-              <input
-                type="text"
-                className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-                placeholder="First name"
-                required
-              />
-              <input
-                type="text"
-                className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-                placeholder="Last name"
-                required
-              />
+              <div className="w-full">
+                <label className="block mb-2 text-sm font-medium text-gray-900">
+                  First name
+                </label>
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                  placeholder="First name"
+                  required
+                />
+              </div>
+              <div className="w-full">
+                <label className="block mb-2 text-sm font-medium text-gray-900">
+                  Last name
+                </label>
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                  placeholder="Last name"
+                  required
+                />
+              </div>
             </div>
             <div className="grid w-full grid-cols-2 gap-2">
-              <input
-                type="text"
-                className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-                placeholder="Profession"
-                required
-              />
-              <input
-                type="text"
-                className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-                placeholder="Location"
-                required
-              />
+              <div className="w-full">
+                <label className="block mb-2 text-sm font-medium text-gray-900">
+                  Profession
+                </label>
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                  placeholder="What are you doing"
+                  required
+                />
+              </div>
+              <div className="w-full">
+                <label className="block mb-2 text-sm font-medium text-gray-900">
+                  Location
+                </label>
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                  placeholder="City, Country"
+                  required
+                />
+              </div>
             </div>
-            <input
-              type="text"
-              className="bg-gray-50 border border-red-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-              placeholder="Date of birth"
-            />
+            <div className="grid w-full grid-cols-2 gap-2">
+              <div className="w-full">
+                <label className="block mb-2 text-sm font-medium text-gray-900">
+                  Date of birth
+                </label>
+                <input
+                  type="text"
+                  className="bg-gray-50 border border-gray-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                  placeholder="DD-MM-YYYY"
+                />
+              </div>
+              <div className="w-full">
+                <label className="block mb-2 text-sm font-medium text-gray-900">
+                  Sex
+                </label>
+                <select
+                  id="sex"
+                  className="bg-gray-50 border border-gray-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                >
+                  <option>-</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </div>
+            </div>
             <div className="w-full">
               <label className="block mb-2 text-sm font-medium text-gray-900">
-                Intro text
+                Catchy text
               </label>
               <textarea
                 id="message"
                 rows={2}
                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-red-200 focus:border-red-200 "
-                placeholder="Description"
+                placeholder="You're my future"
               ></textarea>
             </div>
             <div className="w-full">
@@ -113,6 +151,7 @@ const Profile = () => {
           </form>
         </section>
       </div>
+      <div className="w-full h-16 bg-transparent" />
     </Layout>
   );
 };

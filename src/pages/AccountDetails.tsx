@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { Layout } from "../components/Layout";
 import users from "../data/users.json";
@@ -13,7 +12,7 @@ const AccountDetails = () => {
   const age = new Date().getFullYear() - +user.dateOfBirth.slice(6, 12);
   return (
     <Layout>
-      <div className="flex flex-col items-start justify-start w-full h-full">
+      <div className="flex flex-col items-start justify-start w-full h-full mb-16">
         <div className="relative">
           <img src={user?.imageSrc} className="w-full" />
           <button className="absolute flex items-center justify-center bg-red-500 rounded-full right-2 -bottom-4 w-14 h-14">

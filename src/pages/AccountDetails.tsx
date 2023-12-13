@@ -17,9 +17,11 @@ const AccountDetails = () => {
       <div className="flex flex-col items-start justify-start w-full h-full mb-16">
         <div className="relative">
           <img src={user?.imageSrc} className="w-full" />
-          <button className="absolute flex items-center justify-center bg-red-500 rounded-full right-2 -bottom-4 w-14 h-14">
-            <HeartIcon className="w-10 h-10 text-white" />
-          </button>
+          <div className="absolute flex items-center justify-center w-16 h-16 bg-red-500 rounded-full right-2 -bottom-6">
+            <button className="w-16 h-16 rounded-full button animate">
+              <HeartIcon className="w-10 h-10 text-white" />
+            </button>
+          </div>
         </div>
         <div className="flex flex-col p-4">
           <p className="text-xl text-black">

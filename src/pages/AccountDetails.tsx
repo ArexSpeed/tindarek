@@ -1,16 +1,25 @@
 import { useParams } from "react-router-dom";
 import { Layout } from "../components/Layout";
-import users from "../data/users.json";
+// import users from "../data/users.json";
 import { HeartIcon } from "../components/Icons";
 import { TopBar } from "../components/TopBar";
+import { useAppSelector } from "../context/store";
+import { selectedCurrentUser } from "../context/slices/cardSlice";
 
 const AccountDetails = () => {
   const { id } = useParams();
-  const user = users.find((user) => user.id === id);
+  const user = useAppSelector(selectedCurrentUser);
+
+  //const user = users.find((user) => user.id === id);
   if (!user) {
-    return <Layout>There is no user with this account</Layout>;
+    return (
+      <Layout>
+        <TopBar />
+        There is no user with this account
+      </Layout>
+    );
   }
-  const age = new Date().getFullYear() - +user.dateOfBirth.slice(6, 12);
+  const age = new Date().getFullYear() - +user.birth.slice(6, 12);
   return (
     <Layout>
       <TopBar title={user.nickname} />

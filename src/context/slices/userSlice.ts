@@ -41,10 +41,25 @@ export const userSlice = createSlice({
     addUserData: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
+    logoutUser: (state) => {
+      state.user = {
+        id: "",
+        nickname: "",
+        birth: "",
+        description: "",
+        firstName: "",
+        imageSrc: "",
+        lastName: "",
+        location: "",
+        profession: "",
+        sex: "",
+        shortDescription: "",
+      };
+    },
   },
 });
 
-export const { addUserData } = userSlice.actions;
+export const { addUserData, logoutUser } = userSlice.actions;
 
 export const selectedUserData = (state: RootState) => state.user;
 

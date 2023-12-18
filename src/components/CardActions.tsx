@@ -12,10 +12,10 @@ export const CardActions = () => {
   const selectedUserId = useAppSelector(selectedCurrentUser);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    const findUser = users.find((user) => user.id === selectedUserId);
-    if (findUser) setUser(findUser);
-  }, [selectedUserId]);
+  // useEffect(() => {
+  //   const findUser = users.find((user) => user.id === selectedUserId);
+  //   if (findUser) setUser(findUser);
+  // }, [selectedUserId]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,7 +39,7 @@ export const CardActions = () => {
         <HeartIcon className="w-12 h-12 text-white" />
       </button>
       <Link
-        to={`/account/${selectedUserId}`}
+        to={`/account/${selectedUserId?.id}`}
         className="flex items-center justify-center bg-transparent rounded-full w-14 h-14"
       >
         <EyeSolidIcon className="w-10 h-10 text-blue-400" />

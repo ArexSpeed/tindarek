@@ -64,3 +64,18 @@ export async function updateUserData(user: {
     shortDescription: user.shortDescription,
   });
 }
+
+export async function getUsers() {
+  const userData: unknown[] = [];
+  const userRef = collection(db, "users");
+  //const q = query(userRef, where("nickname", "==", nickname));
+  const querySnapshot = await getDocs(userRef);
+  querySnapshot.forEach((doc) => {
+    console.log("getUsers", doc.data());
+    userData.push({
+      id: doc.id,
+      ...doc.data(),
+    });
+  });
+  return userData;
+}

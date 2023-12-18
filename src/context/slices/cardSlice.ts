@@ -1,8 +1,22 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
+type User = {
+  id: string;
+  nickname: string;
+  firstName: string;
+  lastName: string;
+  profession: string;
+  location: string;
+  birth: string;
+  sex: string;
+  shortDescription: string;
+  description: string;
+  imageSrc: string;
+};
+
 type cardState = {
-  currentUser: string | null;
+  currentUser: User | null;
 };
 
 const initialState: cardState = {
@@ -13,7 +27,7 @@ export const cardSlice = createSlice({
   name: "card",
   initialState,
   reducers: {
-    setCurrentUser: (state, action: PayloadAction<string>) => {
+    setCurrentUser: (state, action: PayloadAction<User>) => {
       state.currentUser = action.payload;
     },
   },

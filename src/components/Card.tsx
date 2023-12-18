@@ -5,7 +5,7 @@ type User = {
   lastName: string;
   profession: string;
   location: string;
-  dateOfBirth: string;
+  birth: string;
   sex: string;
   shortDescription: string;
   description: string;
@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const Card = ({ user }: Props) => {
-  const age = new Date().getFullYear() - +user.dateOfBirth.slice(6, 12);
+  const age = new Date().getFullYear() - +user.birth.slice(6, 12);
 
   return (
     <section className="relative flex flex-col items-center justify-center w-full h-full">

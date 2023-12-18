@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
 import { CameraIcon } from "../components/Icons";
@@ -6,6 +5,8 @@ import { TopBar } from "../components/TopBar";
 import { getUserData, updateUserData } from "../services/users";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase";
+import { addUserData, selectedUserData } from "../context/slices/userSlice";
+import { useAppDispatch, useAppSelector } from "../context/store";
 
 type User = {
   nickname: string;
@@ -25,7 +26,7 @@ const Profile = () => {
   const profileForm = useRef(null!);
   const [imagePreview, setImagePreview] = useState("");
   const [userData, setUserData] = useState<User>({
-    nickname: "Arco",
+    nickname: "",
     birth: "",
     description: "",
     firstName: "",
@@ -36,10 +37,12 @@ const Profile = () => {
     sex: "",
     shortDescription: "",
   });
+  const dispatch = useAppDispatch();
+  const currentUser = useAppSelector(selectedUserData);
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getUserData("Arco");
+      const data = await getUserData(currentUser.user.nickname);
       setUserData(data as User);
     }
     fetchData();
@@ -66,7 +69,7 @@ const Profile = () => {
     e.preventDefault();
     const form = new FormData(profileForm.current);
     const payload = {
-      id: "IAElrw6A6XGPfndgL9o6",
+      id: currentUser.user.id,
       nickname: userData.nickname,
       birth: form.get("birth")?.toString() || userData.birth,
       description: form.get("description")?.toString() || userData.description,
@@ -81,9 +84,8 @@ const Profile = () => {
     };
 
     try {
-      const docRef = await updateUserData(payload);
-
-      console.log("Document is Update", docRef);
+      await updateUserData(payload);
+      dispatch(addUserData(payload));
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -210,13 +212,16 @@ const Profile = () => {
                   id="sex"
                   name="sex"
                   className="bg-gray-50 border border-gray-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-                  defaultValue={userData.sex}
                 >
                   <option>-</option>
-                  <option>Yes</option>
-                  <option>No</option>
-                  <option>Male</option>
-                  <option>Female</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="male" selected={userData.sex === "male"}>
+                    Male
+                  </option>
+                  <option value="female" selected={userData.sex === "female"}>
+                    Female
+                  </option>
                 </select>
               </div>
             </div>

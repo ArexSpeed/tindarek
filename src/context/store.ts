@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import cardReducer from "./slices/cardSlice";
 import matchReducer from "./slices/matchSlice";
+import userReducer from "./slices/userSlice";
 
 export const store = configureStore({
   reducer: {
     card: cardReducer,
     match: matchReducer,
+    user: userReducer,
   },
 });
 

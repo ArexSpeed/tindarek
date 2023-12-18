@@ -4,18 +4,37 @@ import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { findUserExist } from "../services/users";
+import { useAppDispatch } from "../context/store";
+import { addUserData } from "../context/slices/userSlice";
+
+type User = {
+  id: string;
+  nickname: string;
+  firstName: string;
+  lastName: string;
+  profession: string;
+  location: string;
+  birth: string;
+  sex: string;
+  shortDescription: string;
+  description: string;
+  imageSrc: string;
+};
 
 export const Signin = () => {
   const navigate = useNavigate();
   const signinForm = useRef(null!);
+  const dispatch = useAppDispatch();
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const form = new FormData(signinForm.current);
     const nickname = form.get("nickname");
     // if (nickname) findUserExist(nickname.toString());
-    const isUserExist = await findUserExist(nickname?.toString());
+    const { isUserExist, userData } = await findUserExist(nickname?.toString());
     console.log("exist", isUserExist);
     if (isUserExist) {
+      console.log("ud", userData);
+      dispatch(addUserData(userData as User));
       navigate("/discover");
     } else {
       try {
@@ -31,6 +50,21 @@ export const Signin = () => {
           sex: "",
           shortDescription: "",
         });
+        dispatch(
+          addUserData({
+            id: docRef.id,
+            nickname: nickname?.toString() || "",
+            birth: "",
+            description: "",
+            firstName: "",
+            imageSrc: "",
+            lastName: "",
+            location: "",
+            profession: "",
+            sex: "",
+            shortDescription: "",
+          })
+        );
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);

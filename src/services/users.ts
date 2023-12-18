@@ -1,7 +1,6 @@
 import {
   collection,
   doc,
-  addDoc,
   getDocs,
   query,
   where,
@@ -11,16 +10,20 @@ import { db } from "../firebase";
 
 export async function findUserExist(nickname: string | undefined) {
   let isUserExist = false;
+  let userData = {};
   const userRef = collection(db, "users");
   const q = query(userRef, where("nickname", "==", nickname));
   const querySnapshot = await getDocs(q);
-  console.log(querySnapshot);
   querySnapshot.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
     console.log(doc.id, " => ", doc.data());
     isUserExist = true;
+    userData = {
+      id: doc.id,
+      ...doc.data(),
+    };
   });
-  return isUserExist;
+  return { isUserExist, userData };
 }
 
 export async function getUserData(nickname: string | undefined) {
@@ -28,10 +31,7 @@ export async function getUserData(nickname: string | undefined) {
   const userRef = collection(db, "users");
   const q = query(userRef, where("nickname", "==", nickname));
   const querySnapshot = await getDocs(q);
-  console.log(querySnapshot);
   querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, " => ", doc.data());
     userData = doc.data();
   });
   return userData;

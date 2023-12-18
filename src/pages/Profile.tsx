@@ -4,6 +4,8 @@ import { Layout } from "../components/Layout";
 import { CameraIcon } from "../components/Icons";
 import { TopBar } from "../components/TopBar";
 import { getUserData, updateUserData } from "../services/users";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../firebase";
 
 type User = {
   nickname: string;
@@ -21,6 +23,7 @@ type User = {
 const Profile = () => {
   const image1Ref = useRef<HTMLInputElement>(null);
   const profileForm = useRef(null!);
+  const [imagePreview, setImagePreview] = useState("");
   const [userData, setUserData] = useState<User>({
     nickname: "Arco",
     birth: "",
@@ -37,19 +40,26 @@ const Profile = () => {
   useEffect(() => {
     async function fetchData() {
       const data = await getUserData("Arco");
-      console.log("async", data);
       setUserData(data as User);
     }
     fetchData();
-    //setUserData(data);
   }, []);
 
-  const [imagePreview, setImagePreview] = useState("");
   const handleImagePreview = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     const file: File = (target.files as FileList)[0];
     const url = window.URL.createObjectURL(file);
     setImagePreview(url);
+    uploadImage(file);
+  };
+
+  const uploadImage = (file: File) => {
+    const imageRef = ref(storage, `images/${file.name}`);
+    uploadBytes(imageRef, file).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        userData.imageSrc = url;
+      });
+    });
   };
 
   const onSubmit = async (e: React.SyntheticEvent) => {
@@ -61,7 +71,7 @@ const Profile = () => {
       birth: form.get("birth")?.toString() || userData.birth,
       description: form.get("description")?.toString() || userData.description,
       firstName: form.get("firstName")?.toString() || userData.firstName,
-      imageSrc: form.get("imageSrc")?.toString() || userData.imageSrc,
+      imageSrc: userData.imageSrc,
       lastName: form.get("lastName")?.toString() || userData.lastName,
       location: form.get("location")?.toString() || userData.location,
       profession: form.get("profession")?.toString() || userData.profession,
@@ -106,6 +116,12 @@ const Profile = () => {
                   <CameraIcon className="w-6 h-6 text-white" />
                 </button>
               </div>
+              {userData.imageSrc && imagePreview === "" && (
+                <img
+                  src={userData.imageSrc}
+                  className="object-fill w-full h-full"
+                />
+              )}
               {imagePreview && (
                 <img src={imagePreview} className="object-fill w-full h-full" />
               )}

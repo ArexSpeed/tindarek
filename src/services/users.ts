@@ -77,8 +77,22 @@ export async function updateUserData(user: {
   });
 }
 
+type User = {
+  id: string;
+  nickname: string;
+  firstName: string;
+  lastName: string;
+  profession: string;
+  location: string;
+  birth: string;
+  sex: string;
+  shortDescription: string;
+  description: string;
+  imageSrc: string;
+};
+
 export async function getUsers() {
-  const userData: unknown[] = [];
+  const userData: User[] = [];
   const userRef = collection(db, "users");
   //const q = query(userRef, where("nickname", "==", nickname));
   const querySnapshot = await getDocs(userRef);
@@ -86,7 +100,16 @@ export async function getUsers() {
     console.log("getUsers", doc.data());
     userData.push({
       id: doc.id,
-      ...doc.data(),
+      nickname: doc.data().nickname,
+      firstName: doc.data().firstName,
+      lastName: doc.data().lastName,
+      profession: doc.data().profession,
+      location: doc.data().location,
+      birth: doc.data().birth,
+      sex: doc.data().sex,
+      shortDescription: doc.data().shortDescription,
+      description: doc.data().description,
+      imageSrc: doc.data().imageSrc,
     });
   });
   return userData;

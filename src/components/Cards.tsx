@@ -3,12 +3,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCards } from "swiper/modules";
 import { Card } from "./Card";
 // import users from "../data/users.json";
-import { useAppDispatch } from "../context/store";
+import { useAppDispatch, useAppSelector } from "../context/store";
 import { setCurrentUser } from "../context/slices/cardSlice";
 
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { getUsers } from "../services/users";
+import { selectedMyUserData } from "../context/slices/userSlice";
 
 type User = {
   id: string;
@@ -26,6 +27,7 @@ type User = {
 
 export const Cards = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const myUser = useAppSelector(selectedMyUserData);
   const dispatch = useAppDispatch();
   const changeSlide = (index: number) => {
     dispatch(setCurrentUser(users[index]));
@@ -34,10 +36,15 @@ export const Cards = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const data = await getUsers();
-      setUsers(data as User[]);
+      const filterData = data.filter((user) => user.id !== myUser.user.id);
+      setUsers(filterData);
     };
     fetchUsers();
   }, []);
+
+  useEffect(() => {
+    dispatch(setCurrentUser(users[0]));
+  }, [users]);
 
   return (
     <div className="">
@@ -48,14 +55,16 @@ export const Cards = () => {
         className="w-[300px] h-[400px]"
         onSlideChange={(e) => changeSlide(e.activeIndex)}
       >
-        {users.map((user) => (
-          <SwiperSlide
-            key={user.id}
-            className="flex items-center justify-center w-full h-full bg-red-300 rounded-2xl"
-          >
-            <Card user={user} />
-          </SwiperSlide>
-        ))}
+        {users
+          .filter((user) => user.id !== myUser.user.id)
+          .map((user) => (
+            <SwiperSlide
+              key={user.id}
+              className="flex items-center justify-center w-full h-full bg-red-300 rounded-2xl"
+            >
+              <Card user={user} />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

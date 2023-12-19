@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Layout } from "../components/Layout";
-import { HeartIcon } from "../components/Icons";
+import { ChatIcon, HeartIcon } from "../components/Icons";
 import { TopBar } from "../components/TopBar";
 import { getUserDataById } from "../services/users";
 import { useAppSelector } from "../context/store";
@@ -55,6 +55,8 @@ const AccountDetails = () => {
     addMatchToDb(payload);
   };
 
+  const addNewChat = async () => {};
+
   if (!user) {
     return (
       <Layout>
@@ -70,13 +72,23 @@ const AccountDetails = () => {
       <div className="flex flex-col items-start justify-start w-full h-full mb-16">
         <div className="relative">
           <img src={user?.imageSrc} className="w-full" />
-          <div className="absolute flex items-center justify-center w-16 h-16 bg-red-500 rounded-full right-2 -bottom-6">
-            <button
-              onClick={addNewMatch}
-              className="w-16 h-16 rounded-full button animate"
-            >
-              <HeartIcon className="w-10 h-10 text-white" />
-            </button>
+          <div className="absolute flex flex-row items-center justify-center gap-2 rounded-full right-2 -bottom-6">
+            <div className="flex items-center justify-center w-16 h-16 bg-pink-500 rounded-full">
+              <button
+                onClick={addNewChat}
+                className="flex items-center justify-center w-16 h-16 rounded-full"
+              >
+                <ChatIcon className="w-10 h-10 text-white" />
+              </button>
+            </div>
+            <div className="flex items-center justify-center w-16 h-16 bg-red-500 rounded-full">
+              <button
+                onClick={addNewMatch}
+                className="w-16 h-16 rounded-full button animate"
+              >
+                <HeartIcon className="w-10 h-10 text-white" />
+              </button>
+            </div>
           </div>
         </div>
         <div className="flex flex-col p-4">

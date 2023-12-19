@@ -5,8 +5,9 @@ import { TopBar } from "../components/TopBar";
 import { getUserData, updateUserData } from "../services/users";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase";
-import { addUserData, selectedUserData } from "../context/slices/userSlice";
+import { addUserData, selectedMyUserData } from "../context/slices/userSlice";
 import { useAppDispatch, useAppSelector } from "../context/store";
+import { useNavigate } from "react-router-dom";
 
 type User = {
   nickname: string;
@@ -38,14 +39,21 @@ const Profile = () => {
     shortDescription: "",
   });
   const dispatch = useAppDispatch();
-  const currentUser = useAppSelector(selectedUserData);
+  const myUser = useAppSelector(selectedMyUserData);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getUserData(currentUser.user.nickname);
+      const data = await getUserData(myUser.user.nickname);
       setUserData(data as User);
     }
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (!myUser.user.id) {
+      navigate("/");
+    }
   }, []);
 
   const handleImagePreview = (e: ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +77,7 @@ const Profile = () => {
     e.preventDefault();
     const form = new FormData(profileForm.current);
     const payload = {
-      id: currentUser.user.id,
+      id: myUser.user.id,
       nickname: userData.nickname,
       birth: form.get("birth")?.toString() || userData.birth,
       description: form.get("description")?.toString() || userData.description,
@@ -90,6 +98,7 @@ const Profile = () => {
       console.error("Error adding document: ", e);
     }
   };
+
   return (
     <Layout>
       <TopBar title="Profile" />

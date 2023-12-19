@@ -3,12 +3,12 @@ import { CakeIcon, EyeSolidIcon, HeartIcon } from "./Icons";
 import { useAppSelector } from "../context/store";
 import { selectedCurrentUser } from "../context/slices/cardSlice";
 import { Link } from "react-router-dom";
-import { selectedUserData } from "../context/slices/userSlice";
+import { selectedMyUserData } from "../context/slices/userSlice";
 import { addMatchToDb, isMatchExist } from "../services/matches";
 
 export const CardActions = () => {
   const [animateCookie, setAnimateCookie] = useState(false);
-  const myUser = useAppSelector(selectedUserData);
+  const myUser = useAppSelector(selectedMyUserData);
   const selectedUser = useAppSelector(selectedCurrentUser);
 
   useEffect(() => {

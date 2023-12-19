@@ -4,9 +4,10 @@ import { selectedMatchOption } from "../context/slices/matchSlice";
 import { MatchCard, MatchCardFollow } from "../components/MatchCard";
 import { MatchTop } from "../components/MatchTop";
 import { TopBar } from "../components/TopBar";
-import { selectedUserData } from "../context/slices/userSlice";
+import { selectedMyUserData } from "../context/slices/userSlice";
 import { useEffect, useState } from "react";
 import { getUserMatches, getUserMatchesFollowers } from "../services/matches";
+import { useNavigate } from "react-router-dom";
 
 type UserMatch = {
   userId: string;
@@ -23,8 +24,15 @@ const Matches = () => {
   //const matches = useAppSelector(selectedMatchUsers);
   const [matches, setMatches] = useState<UserMatch[]>([]);
   const [matchesFollowers, setMatchesFollowers] = useState<UserMatch[]>([]);
-  const myUser = useAppSelector(selectedUserData);
+  const myUser = useAppSelector(selectedMyUserData);
   const currentOption = useAppSelector(selectedMatchOption);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!myUser.user.id) {
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     async function fetchMatches() {

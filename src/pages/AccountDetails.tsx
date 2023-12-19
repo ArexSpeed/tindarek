@@ -5,7 +5,7 @@ import { HeartIcon } from "../components/Icons";
 import { TopBar } from "../components/TopBar";
 import { getUserDataById } from "../services/users";
 import { useAppSelector } from "../context/store";
-import { selectedUserData } from "../context/slices/userSlice";
+import { selectedMyUserData } from "../context/slices/userSlice";
 import { addMatchToDb, isMatchExist } from "../services/matches";
 
 type User = {
@@ -25,7 +25,7 @@ type User = {
 const AccountDetails = () => {
   const { id } = useParams();
   const [user, setUser] = useState<User>();
-  const myUser = useAppSelector(selectedUserData);
+  const myUser = useAppSelector(selectedMyUserData);
 
   useEffect(() => {
     const fetchUserData = async () => {

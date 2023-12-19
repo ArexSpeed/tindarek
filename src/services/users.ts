@@ -5,6 +5,7 @@ import {
   query,
   where,
   updateDoc,
+  getDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 
@@ -34,6 +35,17 @@ export async function getUserData(nickname: string | undefined) {
   querySnapshot.forEach((doc) => {
     userData = doc.data();
   });
+  return userData;
+}
+
+export async function getUserDataById(id: string) {
+  let userData = {};
+  const userRef = doc(db, "users", id);
+  const querySnapshot = await getDoc(userRef);
+
+  console.log("by id", querySnapshot.data());
+  userData = { ...querySnapshot.data() };
+  console.log("userData", userData);
   return userData;
 }
 

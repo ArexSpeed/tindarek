@@ -1,16 +1,60 @@
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Layout } from "../components/Layout";
-// import users from "../data/users.json";
 import { HeartIcon } from "../components/Icons";
 import { TopBar } from "../components/TopBar";
+import { getUserDataById } from "../services/users";
 import { useAppSelector } from "../context/store";
-import { selectedCurrentUser } from "../context/slices/cardSlice";
+import { selectedUserData } from "../context/slices/userSlice";
+import { addMatchToDb, isMatchExist } from "../services/matches";
+
+type User = {
+  id: string;
+  nickname: string;
+  firstName: string;
+  lastName: string;
+  profession: string;
+  location: string;
+  birth: string;
+  sex: string;
+  shortDescription: string;
+  description: string;
+  imageSrc: string;
+};
 
 const AccountDetails = () => {
   const { id } = useParams();
-  const user = useAppSelector(selectedCurrentUser);
+  const [user, setUser] = useState<User>();
+  const myUser = useAppSelector(selectedUserData);
 
-  //const user = users.find((user) => user.id === id);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userID = id ? id : "";
+      const data = await getUserDataById(userID);
+      console.log("iddata", data);
+      setUser(data as User);
+    };
+
+    fetchUserData();
+  }, []);
+
+  const addNewMatch = async () => {
+    const followUserID = id ? id : "";
+    const checkMatch = await isMatchExist(followUserID, myUser.user.id);
+    if (checkMatch) return;
+    const payload = {
+      userId: myUser.user.id,
+      userName: `${myUser.user.firstName} ${myUser.user.lastName}`,
+      userImage: myUser.user.imageSrc,
+      userBirth: myUser.user.birth,
+      followId: followUserID,
+      followName: `${user?.firstName} ${user?.lastName}`,
+      followImage: user?.imageSrc,
+      followBirth: user?.birth,
+    };
+    addMatchToDb(payload);
+  };
+
   if (!user) {
     return (
       <Layout>
@@ -27,7 +71,10 @@ const AccountDetails = () => {
         <div className="relative">
           <img src={user?.imageSrc} className="w-full" />
           <div className="absolute flex items-center justify-center w-16 h-16 bg-red-500 rounded-full right-2 -bottom-6">
-            <button className="w-16 h-16 rounded-full button animate">
+            <button
+              onClick={addNewMatch}
+              className="w-16 h-16 rounded-full button animate"
+            >
               <HeartIcon className="w-10 h-10 text-white" />
             </button>
           </div>

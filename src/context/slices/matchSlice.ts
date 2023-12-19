@@ -15,12 +15,12 @@ type User = {
 };
 type matchState = {
   users: User[];
-  option: "your" | "new";
+  option: "my" | "followers";
 };
 
 const initialState: matchState = {
   users: [],
-  option: "your",
+  option: "my",
 };
 
 export const matchSlice = createSlice({
@@ -30,7 +30,7 @@ export const matchSlice = createSlice({
     addMatch: (state, action: PayloadAction<User>) => {
       state.users.push(action.payload);
     },
-    toggleOption: (state, action: PayloadAction<"your" | "new">) => {
+    toggleOption: (state, action: PayloadAction<"my" | "followers">) => {
       state.option = action.payload;
     },
   },

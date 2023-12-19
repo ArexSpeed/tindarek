@@ -13,20 +13,20 @@ export const MatchTop = () => {
       <button
         type="button"
         className={`flex flex-row flex-1 w-full items-center justify-center gap-1 m-1 p-1 font-medium rounded-md ${
-          currentOption === "your" && "bg-pink-300 "
+          currentOption === "my" && "bg-pink-300 "
         }`}
-        onClick={() => dispatch(toggleOption("your"))}
+        onClick={() => dispatch(toggleOption("my"))}
       >
-        Your
+        My loves
       </button>
       <button
         type="button"
         className={`flex flex-row flex-1 w-full items-center justify-center gap-1 m-1 p-1 font-medium rounded-md  ${
-          currentOption === "new" && "bg-pink-300"
+          currentOption === "followers" && "bg-pink-300"
         }`}
-        onClick={() => dispatch(toggleOption("new"))}
+        onClick={() => dispatch(toggleOption("followers"))}
       >
-        New
+        They love me
       </button>
     </div>
   );

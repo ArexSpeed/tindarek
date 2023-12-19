@@ -1,21 +1,15 @@
 import { useEffect, useState } from "react";
 import { CakeIcon, EyeSolidIcon, HeartIcon } from "./Icons";
-import { useAppDispatch, useAppSelector } from "../context/store";
+import { useAppSelector } from "../context/store";
 import { selectedCurrentUser } from "../context/slices/cardSlice";
 import { Link } from "react-router-dom";
-import users from "../data/users.json";
-import { addMatch } from "../context/slices/matchSlice";
+import { selectedUserData } from "../context/slices/userSlice";
+import { addMatchToDb, isMatchExist } from "../services/matches";
 
 export const CardActions = () => {
-  const [user, setUser] = useState(users[0]);
   const [animateCookie, setAnimateCookie] = useState(false);
-  const selectedUserId = useAppSelector(selectedCurrentUser);
-  const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   const findUser = users.find((user) => user.id === selectedUserId);
-  //   if (findUser) setUser(findUser);
-  // }, [selectedUserId]);
+  const myUser = useAppSelector(selectedUserData);
+  const selectedUser = useAppSelector(selectedCurrentUser);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,6 +17,22 @@ export const CardActions = () => {
     }, 1000);
     return () => clearTimeout(timer);
   }, [animateCookie]);
+
+  const addNewMatch = async () => {
+    const checkMatch = await isMatchExist(selectedUser.id, myUser.user.id);
+    if (checkMatch) return;
+    const payload = {
+      userId: myUser.user.id,
+      userName: `${myUser.user.firstName} ${myUser.user.lastName}`,
+      userImage: myUser.user.imageSrc,
+      userBirth: myUser.user.birth,
+      followId: selectedUser?.id,
+      followName: `${selectedUser?.firstName} ${selectedUser?.lastName}`,
+      followImage: selectedUser?.imageSrc,
+      followBirth: selectedUser?.birth,
+    };
+    addMatchToDb(payload);
+  };
 
   return (
     <section className="flex flex-row items-center w-full pt-8 justify-evenly">
@@ -32,14 +42,11 @@ export const CardActions = () => {
       >
         <CakeIcon className="w-10 h-10 text-amber-700" />
       </button>
-      <button
-        className="button animate"
-        onClick={() => dispatch(addMatch(user))}
-      >
+      <button className="button animate" onClick={addNewMatch}>
         <HeartIcon className="w-12 h-12 text-white" />
       </button>
       <Link
-        to={`/account/${selectedUserId?.id}`}
+        to={`/account/${selectedUser?.id}`}
         className="flex items-center justify-center bg-transparent rounded-full w-14 h-14"
       >
         <EyeSolidIcon className="w-10 h-10 text-blue-400" />

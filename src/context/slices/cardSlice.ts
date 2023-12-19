@@ -16,11 +16,23 @@ type User = {
 };
 
 type cardState = {
-  currentUser: User | null;
+  currentUser: User;
 };
 
 const initialState: cardState = {
-  currentUser: null,
+  currentUser: {
+    id: "",
+    nickname: "",
+    firstName: "",
+    lastName: "",
+    profession: "",
+    location: "",
+    birth: "",
+    sex: "",
+    shortDescription: "",
+    description: "",
+    imageSrc: "",
+  },
 };
 
 export const cardSlice = createSlice({

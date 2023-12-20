@@ -3,8 +3,8 @@ import { SendIcon } from "./Icons";
 
 export const ChatInput = () => {
   return (
-    <div className="flex flex-row items-center w-full h-16 px-2 bg-white">
-      <div className="flex-grow">
+    <div className="flex flex-row items-center w-full h-16 px-2 bg-transparent">
+      <div className="flex flex-grow w-full">
         <div className="relative w-full">
           <input
             type="text"

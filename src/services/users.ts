@@ -43,9 +43,7 @@ export async function getUserDataById(id: string) {
   const userRef = doc(db, "users", id);
   const querySnapshot = await getDoc(userRef);
 
-  console.log("by id", querySnapshot.data());
   userData = { ...querySnapshot.data() };
-  console.log("userData", userData);
   return userData;
 }
 

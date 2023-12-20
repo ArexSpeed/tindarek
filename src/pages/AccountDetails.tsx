@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Layout } from "../components/Layout";
 import { ChatIcon, HeartIcon } from "../components/Icons";
 import { TopBar } from "../components/TopBar";
@@ -7,6 +7,7 @@ import { getUserDataById } from "../services/users";
 import { useAppSelector } from "../context/store";
 import { selectedMyUserData } from "../context/slices/userSlice";
 import { addMatchToDb, isMatchExist } from "../services/matches";
+import { createNewChatToDb } from "../services/chats";
 
 type User = {
   id: string;
@@ -26,6 +27,7 @@ const AccountDetails = () => {
   const { id } = useParams();
   const [user, setUser] = useState<User>();
   const myUser = useAppSelector(selectedMyUserData);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -55,7 +57,21 @@ const AccountDetails = () => {
     addMatchToDb(payload);
   };
 
-  const addNewChat = async () => {};
+  const onChat = async () => {
+    const followUserID = id ? id : "";
+    // const checkMatch = await isMatchExist(followUserID, myUser.user.id);
+    // if (checkMatch) return;
+    const payload = [
+      {
+        userId: myUser.user.id,
+      },
+      {
+        userId: followUserID,
+      },
+    ];
+    const newChatLink = await createNewChatToDb(payload);
+    navigate(`/chat/${newChatLink}`);
+  };
 
   if (!user) {
     return (
@@ -75,7 +91,7 @@ const AccountDetails = () => {
           <div className="absolute flex flex-row items-center justify-center gap-2 rounded-full right-2 -bottom-6">
             <div className="flex items-center justify-center w-16 h-16 bg-pink-500 rounded-full">
               <button
-                onClick={addNewChat}
+                onClick={onChat}
                 className="flex items-center justify-center w-16 h-16 rounded-full"
               >
                 <ChatIcon className="w-10 h-10 text-white" />

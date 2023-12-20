@@ -1,37 +1,30 @@
 import { ChevronLeftIcon } from "./Icons";
 import { useNavigate } from "react-router-dom";
 
-export interface Chat {
-  chatId: string;
-  users: User[];
-  messages: Message[];
-}
-
-export interface User {
-  userId: string;
+type User = {
+  id: string;
+  nickname: string;
   firstName: string;
   lastName: string;
-  userImageSrc: string;
-}
-
-export interface Message {
-  message: string;
-  userId: string;
-  userImageSrc: string;
-  timestamp: string;
-}
-
-type Props = {
-  chat?: Chat;
+  profession: string;
+  location: string;
+  birth: string;
+  sex: string;
+  shortDescription: string;
+  description: string;
+  imageSrc: string;
 };
 
-export const ChatTopBar = ({ chat }: Props) => {
+type Props = {
+  user: User | undefined;
+};
+
+export const ChatTopBar = ({ user }: Props) => {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   };
-  const userId = "42352346356";
-  const secondUser = chat?.users.find((user) => user.userId !== userId);
+
   return (
     <div className="sticky top-0 z-50 flex flex-row items-center justify-start w-full gap-2 p-2 bg-white">
       <button onClick={goBack} className="bg-transparent outline-none">
@@ -40,12 +33,12 @@ export const ChatTopBar = ({ chat }: Props) => {
       <div className="flex items-center gap-4 p-2">
         <img
           className="object-cover w-10 h-10 rounded-full"
-          src={secondUser?.userImageSrc}
+          src={user?.imageSrc}
           alt=""
         />
         <div className="font-medium text-black">
           <span className="text-lg">
-            {secondUser?.firstName} {secondUser?.lastName}
+            {user?.firstName} {user?.lastName}
           </span>
         </div>
       </div>

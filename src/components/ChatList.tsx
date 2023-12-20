@@ -1,16 +1,35 @@
-import chats from "../data/chats.json";
+import { useState, useEffect } from "react";
+import { selectedMyUserData } from "../context/slices/userSlice";
+import { useAppSelector } from "../context/store";
 import { ChatListBox } from "./ChatListBox";
+import { getUserChats } from "../services/chats";
+
+type ChatUsers = {
+  userId: string;
+};
+
+type Chats = {
+  id: string;
+  users: ChatUsers[];
+};
 
 export const ChatList = () => {
-  const userId = "42352346356";
-  const userChats = chats.filter((chat) =>
-    chat.users.find((user) => user.userId === userId)
-  );
+  const [chats, setChats] = useState<Chats[]>([]);
+  const myUser = useAppSelector(selectedMyUserData);
+
+  useEffect(() => {
+    async function fetchChats() {
+      const data = await getUserChats(myUser.user.id);
+      console.log(data);
+      setChats(data);
+    }
+    fetchChats();
+  }, []);
 
   return (
     <div className="flex flex-col w-full gap-2 p-4 pb-16">
-      {userChats.map((chat) => (
-        <ChatListBox key={chat.chatId} chat={chat} />
+      {chats.map((chat) => (
+        <ChatListBox key={chat.id} chat={chat} />
       ))}
     </div>
   );

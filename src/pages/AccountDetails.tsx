@@ -7,7 +7,7 @@ import { getUserDataById } from "../services/users";
 import { useAppSelector } from "../context/store";
 import { selectedMyUserData } from "../context/slices/userSlice";
 import { addMatchToDb, isMatchExist } from "../services/matches";
-import { createNewChatToDb } from "../services/chats";
+import { createNewChatToDb, getUserChats } from "../services/chats";
 
 type User = {
   id: string;
@@ -21,6 +21,15 @@ type User = {
   shortDescription: string;
   description: string;
   imageSrc: string;
+};
+
+type ChatUsers = {
+  userId: string;
+};
+
+type Chats = {
+  id: string;
+  users: ChatUsers[];
 };
 
 const AccountDetails = () => {
@@ -57,20 +66,31 @@ const AccountDetails = () => {
     addMatchToDb(payload);
   };
 
+  const isChatExist = (chats: Chats[]) => {
+    const findChat = chats.find((chat) =>
+      chat.users.find((user) => user.userId === id)
+    );
+    return findChat;
+  };
+
   const onChat = async () => {
     const followUserID = id ? id : "";
-    // const checkMatch = await isMatchExist(followUserID, myUser.user.id);
-    // if (checkMatch) return;
-    const payload = [
-      {
-        userId: myUser.user.id,
-      },
-      {
-        userId: followUserID,
-      },
-    ];
-    const newChatLink = await createNewChatToDb(payload);
-    navigate(`/chat/${newChatLink}`);
+    const chats = await getUserChats(myUser.user.id);
+    const chatExist = isChatExist(chats);
+    if (chatExist) {
+      navigate(`/chat/${chatExist.id}`);
+    } else {
+      const payload = [
+        {
+          userId: myUser.user.id,
+        },
+        {
+          userId: followUserID,
+        },
+      ];
+      const newChatLink = await createNewChatToDb(payload);
+      navigate(`/chat/${newChatLink}`);
+    }
   };
 
   if (!user) {

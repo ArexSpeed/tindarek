@@ -3,30 +3,14 @@ import { Link } from "react-router-dom";
 import { getUserDataById } from "../services/users";
 import { useAppSelector } from "../context/store";
 import { selectedMyUserData } from "../context/slices/userSlice";
-
-// export interface Chat {
-//   chatId: string;
-//   users: User[];
-//   messages: Message[];
-// }
-
-// export interface User {
-//   userId: string;
-//   firstName: string;
-//   lastName: string;
-//   userImageSrc: string;
-// }
-
-// export interface Message {
-//   message: string;
-//   userId: string;
-//   userImageSrc: string;
-//   timestamp: string;
-// }
-
-// type Props = {
-//   chat: Chat;
-// };
+import {
+  collection,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import { db } from "../firebase";
 
 type ChatUsers = {
   userId: string;
@@ -55,24 +39,48 @@ type User = {
   imageSrc: string;
 };
 
+type Message = {
+  userId: string;
+  message: string;
+  userImage: string;
+  timestamp: unknown;
+};
+
 export const ChatListBox = ({ chat }: Props) => {
   const myUser = useAppSelector(selectedMyUserData);
   const [userData, setUserData] = useState<User>();
   const secondUser = chat.users.find((user) => user.userId !== myUser.user.id);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
     async function fetchUserData() {
-      console.log("secondUser", secondUser);
+      //console.log("secondUser", secondUser);
       if (secondUser?.userId) {
         const data = await getUserDataById(secondUser.userId);
-        console.log("fetchUserData", data);
+        //console.log("fetchUserData", data);
         setUserData(data as User);
       }
     }
     fetchUserData();
   }, []);
 
-  console.log(secondUser);
+  useEffect(() => {
+    const roomRef = doc(db, "chats", chat.id);
+    const messagesRef = collection(roomRef, "messages");
+    const orderedMessagesQuery = query(
+      messagesRef,
+      orderBy("timestamp", "desc")
+    );
+
+    const unsubscribe = onSnapshot(orderedMessagesQuery, (snapshot) => {
+      setMessages(snapshot.docs.map((doc) => doc.data()) as Message[]);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [chat]);
+
   return (
     <Link
       to={`/chat/${chat.id}`}
@@ -87,9 +95,7 @@ export const ChatListBox = ({ chat }: Props) => {
         <div>
           {userData?.firstName} {userData?.lastName}
         </div>
-        <div className="text-sm text-gray-500">
-          {/* {chat.messages[chat.messages.length - 1].message} */}
-        </div>
+        <div className="text-sm text-gray-500">{messages[0]?.message}</div>
       </div>
     </Link>
   );

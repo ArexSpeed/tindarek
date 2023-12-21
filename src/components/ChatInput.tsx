@@ -64,6 +64,7 @@ export const ChatInput = ({ chatId }: { chatId: string }) => {
         <button
           type="submit"
           className="flex items-center justify-center bg-transparent outline-none"
+          onClick={onSubmit}
         >
           <SendIcon className="w-6 h-6 text-pink-300" />
         </button>

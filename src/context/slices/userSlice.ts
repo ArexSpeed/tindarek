@@ -18,20 +18,13 @@ type UserState = {
   user: User;
 };
 
+const userDataStorage: User =
+  localStorage.getItem("userData") !== null
+    ? JSON.parse(localStorage.getItem("userData")!)
+    : [];
+
 const initialState: UserState = {
-  user: {
-    id: "",
-    nickname: "",
-    birth: "",
-    description: "",
-    firstName: "",
-    imageSrc: "",
-    lastName: "",
-    location: "",
-    profession: "",
-    sex: "",
-    shortDescription: "",
-  },
+  user: userDataStorage,
 };
 
 export const userSlice = createSlice({
@@ -40,8 +33,10 @@ export const userSlice = createSlice({
   reducers: {
     addUserData: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
+      localStorage.setItem("userData", JSON.stringify(action.payload));
     },
     logoutUser: (state) => {
+      localStorage.setItem("userData", JSON.stringify({}));
       state.user = {
         id: "",
         nickname: "",

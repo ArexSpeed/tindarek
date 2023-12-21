@@ -1,4 +1,3 @@
-import React from "react";
 import { Signin } from "../components/Signin";
 import { Layout } from "../components/Layout";
 import { HeartActiveIcon } from "../components/Icons";

@@ -1,14 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChatBubble } from "../components/ChatBubble";
 import { ChatInput } from "../components/ChatInput";
 import { Layout } from "../components/Layout";
 import { useParams } from "react-router-dom";
-import chats from "../data/chats.json";
 import { ChatTopBar } from "../components/ChatTopBar";
 import { getChatById } from "../services/chats";
 import { useAppSelector } from "../context/store";
 import { selectedMyUserData } from "../context/slices/userSlice";
 import { getUserDataById } from "../services/users";
+import {
+  collection,
+  query,
+  doc,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
+import { db } from "../firebase";
 
 type ChatUsers = {
   userId: string;
@@ -32,18 +39,24 @@ type User = {
   description: string;
   imageSrc: string;
 };
+type Message = {
+  userId: string;
+  message: string;
+  userImage: string;
+  timestamp: unknown;
+};
 
 const ChatDetails = () => {
   const { id } = useParams();
-  const userId = "42352346356";
-  const messages = chats.find((chat) => chat.chatId === id)?.messages;
   const myUser = useAppSelector(selectedMyUserData);
   const [chatInfo, setChatInfo] = useState<Chats>();
   const [userData, setUserData] = useState<User>();
+  const chatId = id ? id : "";
+  const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
     async function fetchChat() {
-      const chatId = id ? id : "";
+      // const chatId = id ? id : "";
       const data = await getChatById(chatId);
       console.log("chatInfo", data);
       setChatInfo(data as Chats);
@@ -65,6 +78,29 @@ const ChatDetails = () => {
     fetchUserData();
   }, [chatInfo]);
 
+  useEffect(() => {
+    const roomRef = doc(db, "chats", chatId);
+    const messagesRef = collection(roomRef, "messages");
+    const orderedMessagesQuery = query(
+      messagesRef,
+      orderBy("timestamp", "asc")
+    );
+
+    const unsubscribe = onSnapshot(orderedMessagesQuery, (snapshot) => {
+      setMessages(snapshot.docs.map((doc) => doc.data()) as Message[]);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [chatId]);
+
+  const messagesEndRef = useRef<HTMLDivElement>(null!);
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+  useEffect(scrollToBottom, [messages]);
+
   return (
     <Layout>
       <ChatTopBar user={userData} />
@@ -73,14 +109,15 @@ const ChatDetails = () => {
           {messages?.map((message, index) => (
             <ChatBubble
               key={index}
-              ownMsg={message.userId === userId}
+              ownMsg={message.userId === myUser.user.id}
               message={message.message}
-              imageSrc={message.userImageSrc}
+              imageSrc={message.userImage}
             />
           ))}
+          <div ref={messagesEndRef} />
         </div>
         <div className="fixed w-full bottom-16">
-          <ChatInput />
+          <ChatInput chatId={chatId} />
         </div>
       </div>
     </Layout>

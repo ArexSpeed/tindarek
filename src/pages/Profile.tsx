@@ -1,15 +1,17 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Layout } from "../components/Layout";
-import { CameraIcon } from "../components/Icons";
+import { CameraIcon, EyeSolidIcon } from "../components/Icons";
 import { TopBar } from "../components/TopBar";
 import { getUserData, updateUserData } from "../services/users";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase";
 import { addUserData, selectedMyUserData } from "../context/slices/userSlice";
 import { useAppDispatch, useAppSelector } from "../context/store";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Toast } from "../components/Toast";
 
 type User = {
+  id: string;
   nickname: string;
   firstName: string;
   lastName: string;
@@ -27,6 +29,7 @@ const Profile = () => {
   const profileForm = useRef(null!);
   const [imagePreview, setImagePreview] = useState("");
   const [userData, setUserData] = useState<User>({
+    id: "",
     nickname: "",
     birth: "",
     description: "",
@@ -41,6 +44,7 @@ const Profile = () => {
   const dispatch = useAppDispatch();
   const myUser = useAppSelector(selectedMyUserData);
   const navigate = useNavigate();
+  const [openToast, setOpenToast] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -94,6 +98,7 @@ const Profile = () => {
     try {
       await updateUserData(payload);
       dispatch(addUserData(payload));
+      setOpenToast(true);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -102,7 +107,7 @@ const Profile = () => {
   return (
     <Layout>
       <TopBar title="Profile" />
-      <div className="flex flex-col items-center justify-start w-full h-full gap-4 p-2 overflow-auto">
+      <div className="relative flex flex-col items-center justify-start w-full h-full gap-4 p-2 overflow-auto">
         <section className="flex items-center justify-center w-full">
           <form
             onSubmit={(e: React.SyntheticEvent) => onSubmit(e)}
@@ -134,10 +139,21 @@ const Profile = () => {
                 />
               )}
               {imagePreview && (
-                <img src={imagePreview} className="object-fill w-full h-full" />
+                <img
+                  src={imagePreview}
+                  className="object-contain w-full h-full"
+                />
               )}
             </div>
-            <p>{userData.nickname}</p>
+            <div className="flex flex-row items-center justify-center w-full gap-4">
+              <p>{userData.nickname}</p>
+              <Link
+                to={`/account/${myUser.user.id}`}
+                className="flex items-center justify-center w-10 h-10 bg-transparent rounded-full"
+              >
+                <EyeSolidIcon className="w-8 h-8 text-blue-400" />
+              </Link>
+            </div>
 
             <div className="grid w-full grid-cols-2 gap-2">
               <div className="w-full">
@@ -260,6 +276,7 @@ const Profile = () => {
                 defaultValue={userData.description}
               ></textarea>
             </div>
+            <Toast openToast={openToast} setOpenToast={setOpenToast} />
             <button
               type="submit"
               className="text-white bg-red-300 hover:bg-pink-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"

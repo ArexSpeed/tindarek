@@ -31,7 +31,7 @@ export const ChatInput = ({ chatId }: { chatId: string }) => {
     }
   };
   return (
-    <div className="flex flex-row items-center w-full h-16 px-2 bg-white">
+    <div className="flex flex-row items-center w-full max-w-[640px] h-16 px-2 bg-white">
       <div className="flex flex-grow w-full">
         <form ref={sendForm} onSubmit={onSubmit} className="relative w-full">
           <input

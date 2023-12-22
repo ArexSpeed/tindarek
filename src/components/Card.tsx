@@ -20,7 +20,7 @@ export const Card = ({ user }: Props) => {
 
   return (
     <section className="relative flex flex-col items-center justify-center w-full h-full">
-      <img src={user.imageSrc} className="object-fill" />
+      <img src={user.imageSrc} className="" />
       <div className="absolute bottom-0 left-0 p-4">
         <p className="text-xl text-white">
           {user.firstName} {user.lastName}, {age}

@@ -51,6 +51,7 @@ const AccountDetails = () => {
 
   const addNewMatch = async () => {
     const followUserID = id ? id : "";
+    if (followUserID === myUser.user.id) return;
     const checkMatch = await isMatchExist(followUserID, myUser.user.id);
     if (checkMatch) return;
     const payload = {
@@ -75,6 +76,7 @@ const AccountDetails = () => {
 
   const onChat = async () => {
     const followUserID = id ? id : "";
+    if (followUserID === myUser.user.id) return;
     const chats = await getUserChats(myUser.user.id);
     const chatExist = isChatExist(chats);
     if (chatExist) {
@@ -104,7 +106,7 @@ const AccountDetails = () => {
   const age = new Date().getFullYear() - +user.birth.slice(6, 12);
   return (
     <Layout>
-      <TopBar title={user.nickname} />
+      <TopBar />
       <div className="flex flex-col items-start justify-start w-full h-full mb-16">
         <div className="relative">
           <img src={user?.imageSrc} className="w-full" />

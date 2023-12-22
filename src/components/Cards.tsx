@@ -60,7 +60,7 @@ export const Cards = () => {
           .map((user) => (
             <SwiperSlide
               key={user.id}
-              className="flex items-center justify-center w-full h-full bg-red-300 rounded-2xl"
+              className="flex items-center justify-center w-full h-full bg-gradient-to-br from-pink-400 to-red-600 rounded-2xl"
             >
               <Card user={user} />
             </SwiperSlide>

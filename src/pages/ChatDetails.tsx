@@ -56,9 +56,7 @@ const ChatDetails = () => {
 
   useEffect(() => {
     async function fetchChat() {
-      // const chatId = id ? id : "";
       const data = await getChatById(chatId);
-      console.log("chatInfo", data);
       setChatInfo(data as Chats);
     }
 

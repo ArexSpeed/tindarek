@@ -5,7 +5,6 @@ type Props = {
 };
 
 export const ChatBubble = ({ ownMsg, message, imageSrc }: Props) => {
-  console.log(imageSrc);
   return ownMsg ? (
     <div className="flex flex-row-reverse items-end gap-2">
       <img

@@ -28,11 +28,8 @@ export const Signin = () => {
     e.preventDefault();
     const form = new FormData(signinForm.current);
     const nickname = form.get("nickname");
-    // if (nickname) findUserExist(nickname.toString());
     const { isUserExist, userData } = await findUserExist(nickname?.toString());
-    console.log("exist", isUserExist);
     if (isUserExist) {
-      console.log("ud", userData);
       dispatch(addUserData(userData as User));
       navigate("/discover");
     } else {
@@ -64,7 +61,6 @@ export const Signin = () => {
             shortDescription: "",
           })
         );
-        console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }

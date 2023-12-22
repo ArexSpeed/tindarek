@@ -14,7 +14,6 @@ type AddMatch = {
 };
 
 export async function addMatchToDb(data: AddMatch) {
-  console.log("add Match");
   try {
     const docRef = await addDoc(collection(db, "matches"), {
       userId: data.userId,

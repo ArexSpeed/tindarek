@@ -42,7 +42,6 @@ const AccountDetails = () => {
     const fetchUserData = async () => {
       const userID = id ? id : "";
       const data = await getUserDataById(userID);
-      console.log("iddata", data);
       setUser(data as User);
     };
 

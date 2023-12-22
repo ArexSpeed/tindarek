@@ -14,12 +14,10 @@ type ChatUsers = {
 };
 
 export async function createNewChatToDb(users: ChatUsers[]) {
-  console.log("add Chat");
   try {
     const docRef = await addDoc(collection(db, "chats"), {
       users,
     });
-    console.log("Document written with ID: ", docRef.id);
     return docRef.id;
   } catch (e) {
     console.error("Error adding document: ", e);
@@ -34,8 +32,6 @@ type Chats = {
 export async function getUserChats(userId: string) {
   const chats: Chats[] = [];
   const chatRef = collection(db, "chats");
-  console.log("getUserChats");
-  //const q = query(userRef, where("nickname", "==", nickname));
   const q = query(
     chatRef,
     where("users", "array-contains", {
@@ -44,7 +40,6 @@ export async function getUserChats(userId: string) {
   );
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
-    console.log("getChats", doc.data());
     chats.push({
       id: doc.id,
       users: doc.data().users,

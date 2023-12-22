@@ -37,7 +37,7 @@ const Matches = () => {
   useEffect(() => {
     async function fetchMatches() {
       const data = await getUserMatches(myUser.user.id);
-      console.log("return data", data);
+
       setMatches(data as UserMatch[]);
     }
 
@@ -47,7 +47,6 @@ const Matches = () => {
   useEffect(() => {
     async function fetchMatches() {
       const data = await getUserMatchesFollowers(myUser.user.id);
-      console.log("return data", data);
       setMatchesFollowers(data as UserMatch[]);
     }
 

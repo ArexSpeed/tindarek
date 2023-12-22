@@ -106,7 +106,7 @@ const AccountDetails = () => {
   return (
     <Layout>
       <TopBar />
-      <div className="flex flex-col items-start justify-start w-full h-full mb-16">
+      <div className="flex flex-col items-start justify-start w-full h-full mb-16 overflow-x-hidden overflow-y-scroll">
         <div className="relative">
           <img src={user?.imageSrc} className="w-full" />
           <div className="absolute flex flex-row items-center justify-center gap-2 rounded-full right-2 -bottom-6">

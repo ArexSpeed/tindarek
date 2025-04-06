@@ -6,8 +6,10 @@ import {
   where,
   updateDoc,
   getDoc,
+  limit,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { useEffect, useState } from "react";
 
 export async function findUserExist(nickname: string | undefined) {
   let isUserExist = false;
@@ -110,3 +112,36 @@ export async function getUsers() {
   });
   return userData;
 }
+
+export const useUser = () => {
+  const [user, setUser] = useState<{ name: string }>({ name: "" });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userRef = collection(db, "tests");
+        const q = query(userRef, limit(1));
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          const doc = querySnapshot.docs[0];
+          setUser({
+            name: doc.data().name,
+          });
+        } else {
+          setUser({ name: "" });
+        }
+      } catch (err) {
+        setError("Failed to fetch user");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  return { user, loading, error };
+};

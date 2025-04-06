@@ -8,6 +8,7 @@ import Discover from "./pages/Discover";
 import Matches from "./pages/Matches";
 import Chat from "./pages/Chat";
 import ChatDetails from "./pages/ChatDetails";
+import Chats from "./pages/Chats";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/discover" element={<Discover />} />
       <Route path="/matches" element={<Matches />} />
       <Route path="/chat" element={<Chat />} />
+      <Route path="/chats" element={<Chats />} />
       <Route path="/chat/:id" element={<ChatDetails />} />
       <Route path="/account" element={<Account />} />
       <Route path="/account/:id" element={<AccountDetails />} />

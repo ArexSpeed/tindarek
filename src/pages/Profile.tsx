@@ -239,8 +239,8 @@ const Profile = () => {
                   className="bg-gray-50 border border-gray-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
                 >
                   <option>-</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
+                  <option value="female">Yes</option>
+                  <option value="female">No</option>
                   <option value="male" selected={userData.sex === "male"}>
                     Male
                   </option>

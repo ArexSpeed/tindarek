@@ -8,7 +8,7 @@ import { setCurrentUser } from "../context/slices/cardSlice";
 
 import "swiper/css";
 import "swiper/css/effect-cards";
-import { getUsers } from "../services/users";
+import { getUsers, useUser } from "../services/users";
 import { selectedMyUserData } from "../context/slices/userSlice";
 
 type User = {
@@ -28,6 +28,8 @@ type User = {
 export const Cards = () => {
   const [users, setUsers] = useState<User[]>([]);
   const myUser = useAppSelector(selectedMyUserData);
+  const { user } = useUser();
+
   const dispatch = useAppDispatch();
   const changeSlide = (index: number) => {
     dispatch(setCurrentUser(users[index]));
@@ -55,9 +57,22 @@ export const Cards = () => {
         className="w-[300px] h-[400px]"
         onSlideChange={(e) => changeSlide(e.activeIndex)}
       >
-        {users
-          .filter((user) => user.id !== myUser.user.id)
-          .map((user) => (
+        {myUser.user.nickname !== user.name &&
+          users
+            .filter((user) => user.id !== myUser.user.id)
+            .filter((user) => user.sex !== myUser.user.sex)
+            .filter((usr) => usr.nickname !== user.name)
+            .map((user) => (
+              <SwiperSlide
+                key={user.id}
+                className="flex items-center justify-center w-full h-full bg-gradient-to-br from-pink-400 to-red-600 rounded-2xl"
+              >
+                <Card user={user} />
+              </SwiperSlide>
+            ))}
+
+        {myUser.user.nickname === user.name &&
+          users.map((user) => (
             <SwiperSlide
               key={user.id}
               className="flex items-center justify-center w-full h-full bg-gradient-to-br from-pink-400 to-red-600 rounded-2xl"

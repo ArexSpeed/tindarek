@@ -56,3 +56,16 @@ export async function getChatById(chatId: string) {
   chatData = { ...querySnapshot.data() };
   return chatData;
 }
+
+export async function getChats() {
+  const chats: Chats[] = [];
+  const chatRef = collection(db, "chats");
+  const querySnapshot = await getDocs(chatRef);
+  querySnapshot.forEach((doc) => {
+    chats.push({
+      id: doc.id,
+      users: doc.data().users,
+    });
+  });
+  return chats;
+}
